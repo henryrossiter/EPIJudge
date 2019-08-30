@@ -2,8 +2,12 @@ from test_framework import generic_test
 
 
 def buy_and_sell_stock_once(prices):
-    # TODO - you fill in here.
-    return 0.0
+    smallest_seen = float('inf')
+    best_gain = 0.0
+    for item in prices:
+        best_gain = max(item - smallest_seen, best_gain)
+        smallest_seen = min(item, smallest_seen)
+    return best_gain
 
 
 if __name__ == '__main__':

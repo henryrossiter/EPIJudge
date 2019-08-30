@@ -2,8 +2,19 @@ from test_framework import generic_test
 
 
 def is_well_formed(s):
-    # TODO - you fill in here.
-    return True
+    lookup_dict = {'(':')', '{':'}', '[':']'}
+    stack = []
+
+    for letter in s:
+        if letter in lookup_dict:
+            stack.append(letter)
+        else:
+            if not stack:
+                return False
+            top_element = stack.pop()
+            if lookup_dict[top_element] != letter:
+                return False
+    return not stack
 
 
 if __name__ == '__main__':
