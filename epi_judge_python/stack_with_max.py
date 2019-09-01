@@ -1,22 +1,25 @@
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
+from collections import namedtuple
 
 
 class Stack:
+    StackWithMax = namedtuple('StackWithMax', ('value', 'max'))
+
+    def __init__(self):
+        self.stack_with_max = []
+
     def empty(self):
-        # TODO - you fill in here.
-        return True
+        return len(self.stack_with_max) == 0
 
     def max(self):
-        # TODO - you fill in here.
-        return 0
+        return self.stack_with_max[-1].max
 
     def pop(self):
-        # TODO - you fill in here.
-        return 0
+        return self.stack_with_max.pop().value
 
     def push(self, x):
-        # TODO - you fill in here.
+        self.stack_with_max.append(self.StackWithMax(x, x if self.empty() else max(x, self.max())))
         return
 
 
