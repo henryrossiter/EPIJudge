@@ -21,9 +21,17 @@ def flip_color(x, y, image):
             q.append((x, y - 1))
     return
 
+# Recursive solution is slower than iterative
+def flip_color_recursive(x, y, image):
+    color = image[x][y]
+    image[x][y] = not image[x][y]
+    for i, j in ((x+1,y),(x-1,y),(x,y-1),(x,y+1)):
+        if 0 <= i < len(image) and 0 <= j < len(image[i]) and image[i][j] == color:
+            flip_color_recursive(i, j, image)
+
 
 def flip_color_wrapper(x, y, image):
-    flip_color(x, y, image)
+    flip_color_recursive(x, y, image)
     return image
 
 
