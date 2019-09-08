@@ -2,7 +2,17 @@ from test_framework import generic_test
 
 
 def merge_two_sorted_arrays(A, m, B, n):
-    # TODO - you fill in here.
+    index = m + n - 1
+    i = m - 1
+    j = n - 1
+    while index >= 0:
+        if i >=0 and (j < 0 or A[i] >= B[j]):
+            A[index] = A[i]
+            i -= 1
+        elif j >= 0 and (i < 0 or A[i] < B[j]):
+            A[index] = B[j]
+            j -=1
+        index -= 1
     return
 
 
