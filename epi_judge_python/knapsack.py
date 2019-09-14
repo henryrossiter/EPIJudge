@@ -8,8 +8,17 @@ Item = collections.namedtuple('Item', ('weight', 'value'))
 
 
 def optimum_subject_to_capacity(items, capacity):
-    # TODO - you fill in here.
-    return 0
+    def helper(k, curr_capacity):
+        if k < 0:
+            return 0
+        if table[k][curr_capacity] == -1:
+            without_curr_item = helper(k - 1, curr_capacity)
+            with_curr_item = 0 if curr_capacity < items[k].weight else items[k].value + helper(k - 1, curr_capacity - items[k].weight)
+            table[k][curr_capacity] = max(without_curr_item, with_curr_item)
+        return table[k][curr_capacity]
+
+    table = [[-1] * (capacity + 1) for _ in items]
+    return helper(len(items) - 1, capacity)
 
 
 @enable_executor_hook
